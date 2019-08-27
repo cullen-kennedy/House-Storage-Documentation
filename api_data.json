@@ -10,16 +10,23 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "Category[]",
+            "optional": false,
+            "field": "-",
+            "description": "<p>List of categories, &quot;-&quot; is only a placeholder.</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "id",
+            "field": "-.id",
             "description": "<p>Unique id of desired category.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "name",
+            "field": "-.name",
             "description": "<p>Name of the category.</p>"
           }
         ]
@@ -27,7 +34,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n[{\n  \"id\": 1,\n  \"name\": \"Movies\"\n}]",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n         \"id\": 1,\n         \"name\": \"Movies\"\n    },...\n]",
           "type": "json"
         }
       ]
@@ -39,7 +46,7 @@
   {
     "type": "get",
     "url": "containers/:id",
-    "title": "Find a container by its id",
+    "title": "Request specific container",
     "name": "GetContainer",
     "group": "Container",
     "parameter": {
@@ -50,7 +57,7 @@
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>containers unique ID.</p>"
+            "description": "<p>Containers unique ID.</p>"
           }
         ]
       }
@@ -63,35 +70,49 @@
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>Unique id of container.</p>"
+            "description": "<p>Unique id of selected container</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "name",
-            "description": "<p>Name of the container.</p>"
+            "description": "<p>Name of the container</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "link",
-            "description": "<p>Link to itself.</p>"
+            "description": "<p>Self referential link</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "date_entered",
-            "description": "<p>date that the container was entered into the system.</p>"
+            "description": "<p>Date of entry</p>"
           },
           {
             "group": "Success 200",
             "type": "Object",
             "optional": false,
             "field": "rel",
-            "description": "<p>Names of category and location.</p>"
+            "description": "<p>Simple nested relation</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rel.category_name",
+            "description": "<p>Name of related category</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rel.location_name",
+            "description": "<p>Name of related location</p>"
           }
         ]
       },
@@ -110,7 +131,7 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "BadRequest",
-            "description": "<p>Container Id is not valid or is not included</p>"
+            "description": "<p>Parameters are not valid or included</p>"
           },
           {
             "group": "Error 4xx",
@@ -135,7 +156,7 @@
   {
     "type": "get",
     "url": "/containers/:Cid/items/:Iid",
-    "title": "Request specific item from a container",
+    "title": "Request specific item from container",
     "name": "GetContainerItem",
     "group": "ContainerItem",
     "parameter": {
@@ -146,14 +167,14 @@
             "type": "Number",
             "optional": false,
             "field": "Cid",
-            "description": "<p>Containers unique ID.</p>"
+            "description": "<p>Containers unique ID</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "Iid",
-            "description": "<p>Items unique ID.</p>"
+            "description": "<p>Items unique ID</p>"
           }
         ]
       }
@@ -166,21 +187,21 @@
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>Unique id of the item.</p>"
+            "description": "<p>Unique id for selected item</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "name",
-            "description": "<p>Name of the item.</p>"
+            "description": "<p>Name of the item</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "date_entered",
-            "description": "<p>Date that the item was entered into the system.</p>"
+            "description": "<p>Date of entry</p>"
           }
         ]
       },
@@ -199,13 +220,13 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "BadRequest",
-            "description": "<p>parameters are not valid or not included.</p>"
+            "description": "<p>parameters are not valid or not included</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFound",
-            "description": "<p>No item found in this container.</p>"
+            "description": "<p>No item found in this container</p>"
           }
         ]
       },
@@ -224,7 +245,7 @@
   {
     "type": "get",
     "url": "containers/:Cid/items",
-    "title": "Request items from a container",
+    "title": "Request container items",
     "name": "GetContainerItems",
     "group": "ContainerItem",
     "parameter": {
@@ -235,7 +256,7 @@
             "type": "Number",
             "optional": false,
             "field": "Cid",
-            "description": "<p>Unique id of the container.</p>"
+            "description": "<p>Containers unique ID.</p>"
           }
         ]
       }
@@ -245,31 +266,38 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "ContainerItem[]",
+            "optional": false,
+            "field": "-",
+            "description": "<p>List of container items, &quot;-&quot; is only a placeholder</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>Unique id of the item.</p>"
+            "field": "-.id",
+            "description": "<p>Unique id for selected item</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": "<p>name of the item.</p>"
+            "field": "-.name",
+            "description": "<p>Name of the item</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "date_entered",
-            "description": "<p>Date that the item was entered into the system.</p>"
+            "field": "-.date_entered",
+            "description": "<p>Date of entry</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n[{\n  \"id\": 11,\n  \"name\": \"Item name\",\n  \"date_entered\": \"2019-08-26T04:00:00.000Z\"\n}]",
+          "content": "HTTP/1.1 200 OK\n[\n     {\n         \"id\": 11,\n         \"name\": \"Item Name\",\n         \"date_entered\": \"2019-08-26T04:00:00.000Z\"\n     },...\n]",
           "type": "json"
         }
       ]
@@ -281,13 +309,13 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "BadRequest",
-            "description": "<p>Container Id parameter is not valid.</p>"
+            "description": "<p>Parameters are not valid</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFound",
-            "description": "<p>No items found for this container.</p>"
+            "description": "<p>No items found for this container</p>"
           }
         ]
       },
@@ -306,7 +334,7 @@
   {
     "type": "post",
     "url": "containers/:Cid/items",
-    "title": "Add an item into a container",
+    "title": "Add new item to container",
     "name": "PostContainerItem",
     "group": "ContainerItem",
     "parameter": {
@@ -317,14 +345,14 @@
             "type": "Number",
             "optional": false,
             "field": "Cid",
-            "description": "<p>Containers unique ID.</p>"
+            "description": "<p>Containers unique ID</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "name",
-            "description": "<p>Name of new item.</p>"
+            "description": "<p>Name of new item</p>"
           }
         ]
       }
@@ -337,7 +365,7 @@
             "type": "String",
             "optional": false,
             "field": "Message",
-            "description": "<p>A confirmation message</p>"
+            "description": "<p>A simple confirmation message</p>"
           }
         ]
       },
@@ -363,7 +391,7 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  Message: \"request body is invalid. Please provide item name\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  Message: \"Request body is invalid. Please provide item name\"\n}",
           "type": "json"
         }
       ]
@@ -375,7 +403,7 @@
   {
     "type": "get",
     "url": "items",
-    "title": "Find items",
+    "title": "Request items",
     "name": "GetItems",
     "group": "Item",
     "parameter": {
@@ -396,17 +424,59 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Array",
+            "type": "Object[]",
             "optional": false,
-            "field": "Payload",
-            "description": "<p>List of desired items.</p>"
+            "field": "payload",
+            "description": "<p>List of desired items</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "payload.id",
+            "description": "<p>Unique id of selected item</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.name",
+            "description": "<p>Item name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.date_entered",
+            "description": "<p>Date of entry</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "payload.rel",
+            "description": "<p>Simple nested container relationship</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.rel.name",
+            "description": "<p>Name of related container</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.rel.link",
+            "description": "<p>Link to related container</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"payload\": [{\n       \"id\": 1,\n        \"name\": \"V\",\n        \"link\": \"api/items/1\",\n        \"date_entered\": \"2019-08-22T04:00:00.000Z\",\n        \"rel\": {\n            \"name\": \"Box3\",\n            \"link\": \"api/containers/3\"\n         }\n      }]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"payload\": [\n       {\n           \"id\": 1,\n           \"name\": \"V\",\n           \"link\": \"api/items/1\",\n           \"date_entered\": \"2019-08-22T04:00:00.000Z\",\n           \"rel\": {\n               \"name\": \"Box3\",\n               \"link\": \"api/containers/3\"\n            }\n      },...\n   ]\n}",
           "type": "json"
         }
       ]
@@ -418,13 +488,13 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "BadRequest",
-            "description": "<p>Search parameters are invalid.</p>"
+            "description": "<p>Search parameters are invalid</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFound",
-            "description": "<p>No items found.</p>"
+            "description": "<p>No items found</p>"
           }
         ]
       },
@@ -451,24 +521,31 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "-",
+            "description": "<p>List of locations, &quot;-&quot; is only a placeholder.</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "int",
             "optional": false,
-            "field": "id",
-            "description": "<p>Unique id of the location.</p>"
+            "field": "-.id",
+            "description": "<p>Unique id of selected location</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": "<p>Name of the location.</p>"
+            "field": "-.name",
+            "description": "<p>Name of the location</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n[{\n  \"id\": 1,\n  \"name\": \"Garage\"\n}]",
+          "content": "HTTP/1.1 200 OK\n[\n     {\n         \"id\": 1,\n         \"name\": \"Garage\"\n     },...\n]",
           "type": "json"
         }
       ]
