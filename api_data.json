@@ -57,7 +57,7 @@
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>Containers unique ID.</p>"
+            "description": "<p>Unique ID of container</p>"
           }
         ]
       }
@@ -155,7 +155,105 @@
   },
   {
     "type": "get",
-    "url": "/containers/:Cid/items/:Iid",
+    "url": "containers",
+    "title": "Request all containers",
+    "name": "GetContainers",
+    "group": "Container",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "payload",
+            "description": "<p>List of requested containers</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "payload.id",
+            "description": "<p>Unique id of selected container</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.name",
+            "description": "<p>Name of the container</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.link",
+            "description": "<p>Self referential link</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.date_entered",
+            "description": "<p>Date of entry</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "payload.rel",
+            "description": "<p>Simple nested relation</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.rel.category_name",
+            "description": "<p>Name of related category</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "payload.rel.location_name",
+            "description": "<p>Name of related location</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n\"payload\": [\n    {\n      \"id\": 11,\n      \"name\": \"Item name\",\n      \"link\": \"api/containers/2\",\n      \"date_entered\": \"2019-08-26T04:00:00.000Z\",\n      \"rel\": {\n          \"category_name\": \"Movies\",\n          \"location_name\": \"Attic\"\n      }\n    },...\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Parameters are not valid or included</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  Message: \"Bad request\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/containers.controller.js",
+    "groupTitle": "Container"
+  },
+  {
+    "type": "get",
+    "url": "containers/:Cid/items/:Iid",
     "title": "Request specific item from container",
     "name": "GetContainerItem",
     "group": "ContainerItem",
@@ -167,14 +265,14 @@
             "type": "Number",
             "optional": false,
             "field": "Cid",
-            "description": "<p>Containers unique ID</p>"
+            "description": "<p>Unique ID of container</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "Iid",
-            "description": "<p>Items unique ID</p>"
+            "description": "<p>Unique ID of item</p>"
           }
         ]
       }
@@ -226,14 +324,14 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFound",
-            "description": "<p>No item found in this container</p>"
+            "description": "<p>Container not found or Item with Iid not found</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  Message: \"No Items Found for this container\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  Message: \"Container Not Found\"\n}",
           "type": "json"
         }
       ]
@@ -256,7 +354,7 @@
             "type": "Number",
             "optional": false,
             "field": "Cid",
-            "description": "<p>Containers unique ID.</p>"
+            "description": "<p>Unique ID of container</p>"
           }
         ]
       }
@@ -315,14 +413,14 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFound",
-            "description": "<p>No items found for this container</p>"
+            "description": "<p>Container not found</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  Message: \"No Items Found for this container\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  Message: \"Container not found\"\n}",
           "type": "json"
         }
       ]
@@ -345,7 +443,7 @@
             "type": "Number",
             "optional": false,
             "field": "Cid",
-            "description": "<p>Containers unique ID</p>"
+            "description": "<p>Unique ID of container</p>"
           },
           {
             "group": "Parameter",
@@ -385,6 +483,12 @@
             "optional": false,
             "field": "BadRequest",
             "description": "<p>Body Invalid</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFound",
+            "description": "<p>Container Not Found</p>"
           }
         ]
       },
@@ -399,6 +503,89 @@
     "version": "0.0.0",
     "filename": "controllers/containerItems.controller.js",
     "groupTitle": "ContainerItem"
+  },
+  {
+    "type": "post",
+    "url": "containers",
+    "title": "Add new item to container",
+    "name": "PostContainer",
+    "group": "Container",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Cid",
+            "description": "<p>Unique ID of container</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of new item</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>Unique id of related category</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location_id",
+            "description": "<p>Unique id of related location</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Message",
+            "description": "<p>A simple confirmation message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 Created\n{\n  \"Message\": \"Success\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Body Invalid</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  Message: \"Request body is invalid\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/containers.controller.js",
+    "groupTitle": "Container"
   },
   {
     "type": "get",
@@ -489,12 +676,6 @@
             "optional": false,
             "field": "BadRequest",
             "description": "<p>Search parameters are invalid</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "NotFound",
-            "description": "<p>No items found</p>"
           }
         ]
       },
