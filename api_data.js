@@ -90,7 +90,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "date_entered",
+            "field": "dateEntered",
             "description": "<p>Date of entry</p>"
           },
           {
@@ -104,14 +104,14 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "rel.category_name",
+            "field": "rel.categoryName",
             "description": "<p>Name of related category</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "rel.location_name",
+            "field": "rel.locationName",
             "description": "<p>Name of related location</p>"
           }
         ]
@@ -119,7 +119,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 11,\n  \"name\": \"Item name\",\n  \"link\": \"api/containers/2\",\n  \"date_entered\": \"2019-08-26T04:00:00.000Z\",\n  \"rel\": {\n     \"category_name\": \"Movies\",\n     \"location_name\": \"Attic\"\n  }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 11,\n  \"name\": \"Item name\",\n  \"link\": \"api/containers/2\",\n  \"dateEntered\": \"2019-08-26T04:00:00.000Z\",\n  \"rel\": {\n     \"categoryName\": \"Movies\",\n     \"locationName\": \"Attic\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -194,7 +194,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "payload.date_entered",
+            "field": "payload.dateEntered",
             "description": "<p>Date of entry</p>"
           },
           {
@@ -208,14 +208,14 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "payload.rel.category_name",
+            "field": "payload.rel.categoryName",
             "description": "<p>Name of related category</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "payload.rel.location_name",
+            "field": "payload.rel.locationName",
             "description": "<p>Name of related location</p>"
           }
         ]
@@ -223,7 +223,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": " HTTP/1.1 200 OK\n\"payload\": [\n    {\n      \"id\": 11,\n      \"name\": \"Item name\",\n      \"link\": \"api/containers/2\",\n      \"date_entered\": \"2019-08-26T04:00:00.000Z\",\n      \"rel\": {\n          \"category_name\": \"Movies\",\n          \"location_name\": \"Attic\"\n      }\n    },...\n]",
+          "content": " HTTP/1.1 200 OK\n\"payload\": [\n    {\n      \"id\": 11,\n      \"name\": \"Item name\",\n      \"link\": \"api/containers/2\",\n      \"dateEntered\": \"2019-08-26T04:00:00.000Z\",\n      \"rel\": {\n          \"categoryName\": \"Movies\",\n          \"locationName\": \"Attic\"\n      }\n    },...\n]",
           "type": "json"
         }
       ]
@@ -298,7 +298,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "date_entered",
+            "field": "dateEntered",
             "description": "<p>Date of entry</p>"
           }
         ]
@@ -306,7 +306,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 11,\n  \"name\": \"Item name\",\n  \"date_entered\": \"2019-08-26T04:00:00.000Z\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 11,\n  \"name\": \"Item name\",\n  \"dateEntered\": \"2019-08-26T04:00:00.000Z\"\n}",
           "type": "json"
         }
       ]
@@ -387,7 +387,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "-.date_entered",
+            "field": "-.dateEntered",
             "description": "<p>Date of entry</p>"
           }
         ]
@@ -395,7 +395,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n[\n     {\n         \"id\": 11,\n         \"name\": \"Item Name\",\n         \"date_entered\": \"2019-08-26T04:00:00.000Z\"\n     },...\n]",
+          "content": "HTTP/1.1 200 OK\n[\n     {\n         \"id\": 11,\n         \"name\": \"Item Name\",\n         \"dateEntered\": \"2019-08-26T04:00:00.000Z\"\n     },...\n]",
           "type": "json"
         }
       ]
@@ -531,14 +531,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "category_id",
+            "field": "categoryId",
             "description": "<p>Unique id of related category</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "location_id",
+            "field": "locationId",
             "description": "<p>Unique id of related location</p>"
           }
         ]
@@ -634,7 +634,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "payload.date_entered",
+            "field": "payload.dateEntered",
             "description": "<p>Date of entry</p>"
           },
           {
@@ -663,7 +663,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"payload\": [\n       {\n           \"id\": 1,\n           \"name\": \"V\",\n           \"link\": \"api/items/1\",\n           \"date_entered\": \"2019-08-22T04:00:00.000Z\",\n           \"rel\": {\n               \"name\": \"Box3\",\n               \"link\": \"api/containers/3\"\n            }\n      },...\n   ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"payload\": [\n       {\n           \"id\": 1,\n           \"name\": \"V\",\n           \"link\": \"api/items/1\",\n           \"dateEntered\": \"2019-08-22T04:00:00.000Z\",\n           \"rel\": {\n               \"name\": \"Box3\",\n               \"link\": \"api/containers/3\"\n            }\n      },...\n   ]\n}",
           "type": "json"
         }
       ]
