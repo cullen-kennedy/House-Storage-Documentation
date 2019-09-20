@@ -507,7 +507,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "containers",
-    "title": "Add new item to container",
+    "title": "Add new container",
     "name": "PostContainer",
     "group": "Container",
     "parameter": {
@@ -515,17 +515,10 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "Cid",
-            "description": "<p>Unique ID of container</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "name",
-            "description": "<p>Name of new item</p>"
+            "description": "<p>Name of new container</p>"
           },
           {
             "group": "Parameter",
